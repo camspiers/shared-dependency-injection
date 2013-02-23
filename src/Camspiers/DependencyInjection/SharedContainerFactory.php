@@ -15,6 +15,16 @@ class SharedContainerFactory
     protected static $extensions = array();
     protected static $compilerPasses = array();
 
+    public static function requireExtensionConfigs($path, $name = '_extensions.php')
+    {
+        $path = realpath($path);
+        if (file_exists($path)) {
+            foreach (glob("$path/*/$name") as $file) {
+                require_once $file;
+            }
+        }
+    }
+
     public static function hasExtension($alias)
     {
         return isset(self::$extensions[$alias]);
