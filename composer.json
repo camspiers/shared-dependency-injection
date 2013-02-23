@@ -1,6 +1,6 @@
 {
-    "name": "camspiers/silverstripe-dependency-injection",
-    "description": "Dependency Injection for SilverStripe 2.4+",
+    "name": "camspiers/shared-dependency-injection",
+    "description": "Shared Dependency Injection",
     "authors": [
         {
             "name": "Cam Spiers",
@@ -18,13 +18,6 @@
         "symfony/config": "~2.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7",
-        "silverstripe/framework": "~2.4",
-        "composer/composer": "1.0.0-alpha6"
-    },
-    "extra": {
-        "installer-paths": {
-            "sapphire": [ "silverstripe/framework" ]
-        }
+        "phpunit/phpunit": "~3.7"
     }
 }
