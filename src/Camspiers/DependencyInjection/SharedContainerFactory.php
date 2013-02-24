@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Config\FileLocator;
 use RuntimeException;
 
 class SharedContainerFactory
@@ -91,7 +93,8 @@ class SharedContainerFactory
     }
 
     public static function createContainer(
-        array $parameters = array()
+        array $parameters = array(),
+        $servicesLocation = false
     ) {
         $container = new ContainerBuilder();
 
@@ -101,6 +104,14 @@ class SharedContainerFactory
 
         foreach (self::$compilerPasses as $compilerPass) {
             $container->addCompilerPass($compilerPass);
+        }
+
+        if ($servicesLocation && file_exists($servicesLocation)) {
+            $loader = new YamlFileLoader(
+                $container,
+                new FileLocator(dirname($servicesLocation))
+            );
+            $loader->load(basename($servicesLocation));
         }
 
         $container->getParameterBag()->add($parameters);
