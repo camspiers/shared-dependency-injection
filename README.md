@@ -1,5 +1,7 @@
 # Shared Dependency Injection
 
+[![Build Status](https://travis-ci.org/camspiers/shared-dependency-injection.png?branch=master)](https://travis-ci.org/camspiers/shared-dependency-injection)
+
 Provides the ability to build a symfony dependency injection container which multiple unrelated module or libraries add their extensions and compiler passes to.
 
 # Installation (with composer)
