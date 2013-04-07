@@ -6,7 +6,7 @@ Provides the ability to build a symfony dependency injection container which mul
 
 # Installation (with composer)
 
-	$ composer require camspiers/shared-dependency-injection:~0.1
+	$ composer require camspiers/shared-dependency-injection:~0.2
 
 # Usage
 
