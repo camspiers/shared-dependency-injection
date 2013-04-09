@@ -153,13 +153,15 @@ class SharedContainerFactory
     }
     /**
      * Create a container based on the static configuration of this class
+     * @param array $paths
+     * @param       $file
      * @param array $parameters
-     * @param bool  $servicesLocation
      * @return ContainerBuilder
      */
     public static function createContainer(
-        array $parameters = array(),
-        $servicesLocation = false
+        array $paths = array(),
+        $file = null,
+        array $parameters = array()
     ) {
         $container = new ContainerBuilder();
 
@@ -171,10 +173,12 @@ class SharedContainerFactory
             $container->addCompilerPass($compilerPass[0], $compilerPass[1]);
         }
 
-        if ($servicesLocation && file_exists($servicesLocation)) {
+        if (is_array($paths) && null !== $file) {
             $loader = new YamlFileLoader(
                 $container,
-                new FileLocator(dirname($servicesLocation))
+                new FileLocator(
+                    $paths
+                )
             );
             $loader->load(basename($servicesLocation));
         }
