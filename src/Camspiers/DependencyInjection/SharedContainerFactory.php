@@ -180,7 +180,7 @@ class SharedContainerFactory
                     $paths
                 )
             );
-            $loader->load(basename($servicesLocation));
+            $loader->load($file);
         }
 
         $container->getParameterBag()->add($parameters);
