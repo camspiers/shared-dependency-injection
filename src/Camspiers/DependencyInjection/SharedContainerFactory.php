@@ -6,8 +6,6 @@ use RuntimeException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -163,7 +161,7 @@ class SharedContainerFactory
         array $paths = array(),
         $file = null,
         array $parameters = array(),
-        $containerBuilderClass = 'ContainerBuilder'
+        $containerBuilderClass = 'Symfony\Component\DependencyInjection\ContainerBuilder'
     ) {
         $container = new $containerBuilderClass();
 
@@ -201,7 +199,7 @@ class SharedContainerFactory
         Container $container,
         $class,
         $location,
-        $baseClass = 'Container'
+        $baseClass = 'Symfony\Component\DependencyInjection\Container'
     ) {
         if (!file_exists($location)) {
             throw new RuntimeException('Dump location does not exist');
