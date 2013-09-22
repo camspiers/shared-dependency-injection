@@ -154,16 +154,18 @@ class SharedContainerFactory
     /**
      * Create a container based on the static configuration of this class
      * @param array $paths
-     * @param       $file
+     * @param null $file
      * @param array $parameters
-     * @return ContainerBuilder
+     * @param string $containerBuilderClass
+     * @return mixed
      */
     public static function createContainer(
         array $paths = array(),
         $file = null,
-        array $parameters = array()
+        array $parameters = array(),
+        $containerBuilderClass = 'ContainerBuilder'
     ) {
-        $container = new ContainerBuilder();
+        $container = new $containerBuilderClass();
 
         foreach (self::$extensions as $extension) {
             $container->registerExtension($extension);
@@ -190,14 +192,16 @@ class SharedContainerFactory
     /**
      * Dump a container
      * @param Container $container
-     * @param           $class
-     * @param           $location
+     * @param $class
+     * @param $location
+     * @param string $baseClass
      * @throws \RuntimeException
      */
     public static function dumpContainer(
         Container $container,
         $class,
-        $location
+        $location,
+        $baseClass = 'Container'
     ) {
         if (!file_exists($location)) {
             throw new RuntimeException('Dump location does not exist');
@@ -211,7 +215,8 @@ class SharedContainerFactory
             realpath($location) . "/$class.php",
             $dumper->dump(
                 array(
-                    'class' => $class
+                    'class' => $class,
+                    'base_class' => $baseClass
                 )
             )
         );
